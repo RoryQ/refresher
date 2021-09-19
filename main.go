@@ -69,9 +69,9 @@ func getGcpExpiryFromGcloud(login string) time.Time {
 	gcloud.Run()
 
 	for _, line := range strings.Split(out.String(), "\n") {
-		if strings.HasPrefix(line, "token_expiry") {
-			dateString := strings.Trim(strings.ReplaceAll(line, "token_expiry: ", ""), "'")
-			date, err := time.Parse(time.RFC3339, dateString)
+		if strings.HasPrefix(line, "expiry") {
+			dateString := strings.Trim(strings.ReplaceAll(line, "expiry: ", ""), "'")
+			date, err := time.Parse("01-02-2006 15:04:05", dateString)
 			if err != nil {
 				log.Fatal(err.Error())
 			}
